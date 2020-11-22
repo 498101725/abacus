@@ -1,0 +1,70 @@
+{
+  "scripts": {
+    "lint:eslint": "eslint --ext .ts,.html . --ignore-path .gitignore",
+    "format:eslint": "eslint --ext .ts,.html . --fix --ignore-path .gitignore",
+    "lint:prettier": "prettier \"**/*.js\" \"**/*.ts\" --check --ignore-path .gitignore",
+    "format:prettier": "prettier \"**/*.js\" \"**/*.ts\" --write --ignore-path .gitignore",
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "build": "rimraf dist && webpack --mode production --sourcemap inline-cheap-module-source-map",
+    "dev": "rimraf dist && webpack --watch --mode development --sourcemap inline-source-map",
+    "start": "es-dev-server --app-index dist/index.html --open --watch"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@open-wc/building-webpack": "^2.13.40",
+    "@open-wc/eslint-config": "^2.0.0",
+    "@types/node": "13.11.1",
+    "@typescript-eslint/eslint-plugin": "^2.20.0",
+    "@typescript-eslint/parser": "^2.20.0",
+    "base64-inline-loader": "^1.1.1",
+    "concurrently": "^5.1.0",
+    "css-loader": "^4.2.2",
+    "es-dev-server": "^1.57.3",
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "friendly-errors-webpack-plugin": "^1.7.0",
+    "husky": "^1.0.0",
+    "lint-staged": "^10.0.0",
+    "prettier": "^2.0.4",
+    "rimraf": "^2.6.3",
+    "terser-webpack-plugin": "^4.1.0",
+    "ts-loader": "^8.0.3",
+    "tslib": "^1.11.0",
+    "typescript": "~3.9.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "yargs": "^15.4.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@open-wc/eslint-config",
+      "eslint-config-prettier"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "arrowParens": "avoid"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "name": "abacus-assistant",
+  "version": "0.0.0",
+  "description": "Webcomponent abacus-assistant following open-wc recommendations",
+  "author": "abacus-assistant",
+  "license": "MIT",
+  "dependencies": {
+    "@kor-ui/kor": "^1.2.13",
+    "lit-element": "^2.0.1",
+    "lit-html": "^1.0.0"
+  }
+}
